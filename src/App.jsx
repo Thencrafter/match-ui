@@ -17,7 +17,7 @@ function App() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/users');
+      const response = await fetch('https://match-backend-rfu7.onrender.com/api/users');
       const data = await response.json();
       setUsers(data);
     } catch (error) {
@@ -32,7 +32,7 @@ function App() {
     }
     
     try {
-      const response = await fetch(`http://localhost:5000/api/users/${searchTerm}`);
+      const response = await fetch(`https://match-backend-rfu7.onrender.com/api/users/${searchTerm}`);
       const data = await response.json();
       setSearchResults(data);
     } catch (error) {
@@ -42,7 +42,7 @@ function App() {
 
   const handleFindMatch = async (userName) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/find_match/${userName}`);
+      const response = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match/${userName}`);
       const data = await response.json();
       setPotentialMatches(prev => ({
         ...prev,
@@ -55,7 +55,7 @@ function App() {
 
   const handleCreateMatch = async (user1, user2) => {
     try {
-      request = await fetch(`http://localhost:5000/api/find_match?user1=${user1}&user2=${user2}`, {
+      request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match?user1=${user1}&user2=${user2}`, {
         method: 'POST'
       });
       // Refresh the user list to show updated match status
@@ -73,7 +73,7 @@ function App() {
 
   const handleRemoveMatch = async (userName) => {
     try {
-      await fetch(`http://localhost:5000/api/delete_match/${userName}`, {
+      await fetch(`https://match-backend-rfu7.onrender.com/api/delete_match/${userName}`, {
         method: 'POST'
       });
       // Refresh the user list to show updated match status
@@ -85,7 +85,7 @@ function App() {
 
   const handleAddPerson = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/users', {
+      const response = await axios.post('https://match-backend-rfu7.onrender.com/api/users', {
         text: newPersonData,
       });
       setShowAddPerson(false);
