@@ -1,0 +1,5 @@
+{
+    "name": "worker",
+    "compatibility-date": "2025-07-06",
+    "main": "src/App.jsx"
+}
