@@ -55,7 +55,7 @@ function App() {
 
   const handleCreateMatch = async (user1, user2) => {
     try {
-      request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match?user1=${user1}&user2=${user2}`, {
+      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match?user1=${user1}&user2=${user2}`, {
         method: 'POST'
       });
       // Refresh the user list to show updated match status
@@ -73,7 +73,7 @@ function App() {
 
   const handleRemoveMatch = async (userName) => {
     try {
-      await fetch(`https://match-backend-rfu7.onrender.com/api/delete_match/${userName}`, {
+      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/delete_match/${userName}`, {
         method: 'POST'
       });
       // Refresh the user list to show updated match status
