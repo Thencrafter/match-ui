@@ -25,14 +25,14 @@ function App() {
     }
   };
 
-  const handleSearch = async () => {
+  const handleSearch = async (searchedThing) => {
     if (!searchTerm.trim()) {
       setSearchResults([]);
       return;
     }
     
     try {
-      const response = await fetch(`https://match-backend-rfu7.onrender.com/api/users/${searchTerm}`);
+      const response = await fetch(`https://match-backend-rfu7.onrender.com/api/users/${searchedThing}`);
       const data = await response.json();
       setSearchResults(data);
     } catch (error) {
@@ -109,10 +109,10 @@ function App() {
             placeholder="Search users..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyUp={(e) => e.key === 'Enter' && handleSearch()}
+            onKeyUp={(e) => handleSearch(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
           <button onClick={() => setShowAddPerson(!showAddPerson)}>Add Person</button>
+          <button onClick={fetchUsers}>Refresh List</button>
         </div>
 
         {showAddPerson && (
@@ -143,7 +143,7 @@ function App() {
                     <p>Gender: {user.Gender}</p>
                     <p>Pronouns: {user.Pronouns}</p>
                     <p>Likes: {user.Likes.join(', ')}</p>
-                    <p>Match Preference: {user.Match}</p>
+                    <p>Extra: {user.Extra}</p>
                     {user.Matched && (
                       <p>Matched with: {user.MatchedWith}</p>
                     )}
