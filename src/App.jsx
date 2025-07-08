@@ -40,9 +40,9 @@ function App() {
     }
   };
 
-  const handleFindMatch = async (userName) => {
+  const handleFindMatch = async (userName, id) => {
     try {
-      const response = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match/${userName}`);
+      const response = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match/${userName}&${id}`);
       const data = await response.json();
       setPotentialMatches(prev => ({
         ...prev,
@@ -55,7 +55,7 @@ function App() {
 
   const handleCreateMatch = async (user1, id1, user2, id2) => {
     try {
-      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match?user1=${user1}&id1=${id1}&user2=${user2}&id2=${id2}`, {
+      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match/${user1}&${id1}&${user2}&${id2}`, {
         method: 'POST'
       });
       // Refresh the user list to show updated match status
@@ -145,7 +145,7 @@ function App() {
                     <p>Likes: {user.Likes.join(', ')}</p>
                     <p>Extra: {user.Extra}</p>
                     {user.Matched && (
-                      <p>Matched with: {user.MatchedWith}</p>
+                      <p>Matched with: {user.MatchedWith.Name}</p>
                     )}
                   </div>
                   <div className="user-actions">
