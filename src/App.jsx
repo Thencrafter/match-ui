@@ -151,7 +151,7 @@ function App() {
                   <div className="user-actions">
                     {!user.Matched ? (
                       <>
-                        <button onClick={() => handleFindMatch(user.Name)}>
+                        <button onClick={() => handleFindMatch(user.Name, user.Id)}>
                           Find Matches
                         </button>
                         {potentialMatches[user.Name] && (
