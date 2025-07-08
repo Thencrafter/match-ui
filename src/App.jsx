@@ -55,7 +55,7 @@ function App() {
 
   const handleCreateMatch = async (user1, user2) => {
     try {
-      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match?user1=${user1}&user2=${user2}`, {
+      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match?user1=${user1}&id1=${id1}&user2=${user2}&id2=${id2}`, {
         method: 'POST'
       });
       // Refresh the user list to show updated match status
@@ -71,9 +71,9 @@ function App() {
     }
   };
 
-  const handleRemoveMatch = async (userName) => {
+  const handleRemoveMatch = async (userName, id) => {
     try {
-      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/delete_match/${userName}`, {
+      const request = await fetch(`https://match-backend-rfu7.onrender.com/api/delete_match/${userName}&${id}`, {
         method: 'POST'
       });
       // Refresh the user list to show updated match status
@@ -118,7 +118,7 @@ function App() {
         {showAddPerson && (
           <div className="add-person-container">
             <textarea
-              placeholder="Enter person data in the format: [Name], [Age], [TimeZone], etc."
+              placeholder="Do not touch this, I will add people myself. I'll also probably make this automatic later and remove the button"
               value={newPersonData}
               onChange={(e) => setNewPersonData(e.target.value)}
               rows={5}
@@ -160,7 +160,10 @@ function App() {
                             <ul>
                               {potentialMatches[user.Name].map((match) => (
                                 <li key={match.Name}>
-                                  {match.Name}
+                                  <div className="match-info">
+                                    <p>{match.Name}</p>
+                                    <p>{match.Extra}</p>
+                                  </div>
                                   <button onClick={() => handleCreateMatch(user.Name, match.Name)}>
                                     Match
                                   </button>
@@ -171,7 +174,7 @@ function App() {
                         )}
                       </>
                     ) : (
-                      <button onClick={() => handleRemoveMatch(user.Name)}>
+                      <button onClick={() => handleRemoveMatch(user.Name, user.Id)}>
                         Unmatch
                       </button>
                     )}
