@@ -53,7 +53,7 @@ function App() {
     }
   };
 
-  const handleCreateMatch = async (user1, user2) => {
+  const handleCreateMatch = async (user1, id1, user2, id2) => {
     try {
       const request = await fetch(`https://match-backend-rfu7.onrender.com/api/find_match?user1=${user1}&id1=${id1}&user2=${user2}&id2=${id2}`, {
         method: 'POST'
@@ -164,7 +164,7 @@ function App() {
                                     <p>{match.Name}</p>
                                     <p>{match.Extra}</p>
                                   </div>
-                                  <button onClick={() => handleCreateMatch(user.Name, match.Name)}>
+                                  <button onClick={() => handleCreateMatch(user.Name, user.Id, match.Name, match.Id)}>
                                     Match
                                   </button>
                                 </li>
